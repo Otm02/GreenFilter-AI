@@ -81,13 +81,17 @@ function showBotMessage(message, datetime) {
  */
 $('#send_button').on('click', function (e) {
 	// get and show message and reset input
-	showUserMessage($('#msg_input').val());
-	$('#msg_input').val('');
+	if($('#msg_input').val()!== ''){
+		showUserMessage($('#msg_input').val());
+		$('#msg_input').val('');
 
-	// show bot message
-	setTimeout(function () {
-		showBotMessage(randomstring());
-	}, 300);
+		// show bot message
+		setTimeout(function () {
+			showBotMessage(randomstring());
+		}, 300);
+	}else{
+		showAlert("You are trying to send an empty input for the AI! Please input something.", 'alert-danger')
+	}
 });
 
 /**
@@ -114,3 +118,31 @@ function randomstring(length = 20) {
 $(window).on('load', function () {
 	showBotMessage('Hello there! Type in a message.');
 });
+
+/**
+ *  Creates an alert to the screne for the user.
+ */
+
+function showAlert(message, alertType) {
+    // Create Bootstrap alert dynamically
+	if (!isAlertDisplayed()) {
+		let alertDiv = document.createElement('div');
+		alertDiv.classList.add('alert', alertType, 'mt-3');
+		alertDiv.setAttribute('role', 'alert');
+		alertDiv.textContent = message;
+
+		// Append the alert to the document body
+		document.body.appendChild(alertDiv);
+
+		// Auto-dismiss the alert after 3 seconds (adjust as needed)
+		setTimeout(function() {
+			alertDiv.remove();
+		}, 3000);
+	}
+}
+
+
+function isAlertDisplayed() {
+    // Check if the alert is present in the DOM
+    return !!document.querySelector('.alert');
+}
