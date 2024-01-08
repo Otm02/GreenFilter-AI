@@ -70,11 +70,11 @@ $('#send_button').on('click', function (e) {
 	// get and show message and reset input
 	if($('#exampleFormControlTextarea1').val()!== '' && $('#exampleFormControlTextarea2').val()!== '' ){
 		showUserMessage( "<h3> Your Problem: </h3> " + $('#exampleFormControlTextarea1').val() + "<h3> Your Solution: </h3> " + $('#exampleFormControlTextarea2').val());
+		// Make api call in order to handle the users input
+		makeApiCall($('#exampleFormControlTextarea1').val(), $('#exampleFormControlTextarea2').val())
 		$('#exampleFormControlTextarea1').val('');
 		$('#exampleFormControlTextarea2').val('');
 
-		// Make api call in order to handle the users input
-		makeApiCall()
 	}else{
 		showAlert("You are trying to send an empty input for the AI! Please input something.", 'alert-danger')
 	}
@@ -120,9 +120,19 @@ function isAlertDisplayed() {
 /**
  * Makes an api call to the AI to receive the result
  */
-function makeApiCall() {
+function makeApiCall(problem, solution) {
 	// Public api to test ui
-    fetch('https://catfact.ninja/fact') 
+    fetch('/solve', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+            // You can add other headers as needed
+        },
+        body: JSON.stringify({
+            problem: problem,
+            solution: solution
+        })
+    })
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -131,7 +141,7 @@ function makeApiCall() {
         })
         .then(data => {
             // Handle the data from the API response
-			showBotMessage(data.fact)
+			showBotMessage(data.answer)
             console.log('API Response:', data);
         })
         .catch(error => {
