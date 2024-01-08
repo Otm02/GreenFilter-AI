@@ -40,19 +40,6 @@ function renderMessageToScreen(args) {
 	messagesContainer.animate({ scrollTop: messagesContainer.prop('scrollHeight') }, 300);
 }
 
-/* Sends a message when the 'Enter' key is pressed.
- */
-$(document).ready(function() {
-    $('#msg_input').keydown(function(e) {
-        // Check for 'Enter' key
-        if (e.key === 'Enter') {
-            // Prevent default behaviour of enter key
-            e.preventDefault();
-			// Trigger send button click event
-            $('#send_button').click();
-        }
-    });
-});
 
 /**
  * Displays the user message on the chat screen. This is the right side message.
@@ -81,14 +68,17 @@ function showBotMessage(message, datetime) {
  */
 $('#send_button').on('click', function (e) {
 	// get and show message and reset input
-	if($('#msg_input').val()!== ''){
-		showUserMessage($('#msg_input').val());
-		$('#msg_input').val('');
-
+	if($('#exampleFormControlTextarea1').val()!== '' && $('#exampleFormControlTextarea2').val()!== '' ){
+		showUserMessage($('#exampleFormControlTextarea1').val());
+		$('#exampleFormControlTextarea1').val('');
+		$('#exampleFormControlTextarea2').val('');
 		// show bot message
-		setTimeout(function () {
-			showBotMessage(randomstring());
-		}, 300);
+		// setTimeout(function () {
+		// 	showBotMessage(randomstring());
+		// }, 300);
+
+		// Make api call in order to handle the users input
+		makeApiCall()
 	}else{
 		showAlert("You are trying to send an empty input for the AI! Please input something.", 'alert-danger')
 	}
@@ -116,7 +106,7 @@ function randomstring(length = 20) {
  * Set initial bot message to the screen for the user.
  */
 $(window).on('load', function () {
-	showBotMessage('Hello there! Type in a message.');
+	showBotMessage('Hello there! Type in your problem and your solution.');
 });
 
 /**
@@ -132,7 +122,8 @@ function showAlert(message, alertType) {
 		alertDiv.textContent = message;
 
 		// Append the alert to the document body
-		document.body.appendChild(alertDiv);
+		document.body.insertBefore(alertDiv, document.body.firstChild);
+
 
 		// Auto-dismiss the alert after 3 seconds (adjust as needed)
 		setTimeout(function() {
@@ -141,8 +132,32 @@ function showAlert(message, alertType) {
 	}
 }
 
-
+/**
+ * Check if the alert is present in the DOM
+ */
 function isAlertDisplayed() {
-    // Check if the alert is present in the DOM
     return !!document.querySelector('.alert');
+}
+
+/**
+ * Makes an api call to the AI to receive the result
+ */
+function makeApiCall() {
+	// Public api to test ui
+    fetch('https://catfact.ninja/fact') 
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Handle the data from the API response
+			showBotMessage(data.fact)
+            console.log('API Response:', data);
+        })
+        .catch(error => {
+            // Handle errors during the API call
+            console.error('Error during API call:', error);
+        });
 }

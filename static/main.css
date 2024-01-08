@@ -98,10 +98,10 @@ body {
 	margin-top: 0px;
 }
 
-.messages .message .text_wrapper::before {
+/* .messages .message .text_wrapper::before {
 	border-width: 15px;
 	margin-top: -2px;
-}
+} */
 
 /* bot message */
 
@@ -118,7 +118,7 @@ body {
 .messages .message.left .text_wrapper::after,
 .messages .message.left .text_wrapper::before {
 	right: 100%;
-	border-right-color: #f3eeca;
+	/* border-right-color: #f3eeca; */
 }
 
 .messages .message.left .timestamp {
@@ -141,7 +141,6 @@ body {
 .messages .message.right .text_wrapper::after,
 .messages .message.right .text_wrapper::before {
 	left: 100%;
-	border-left-color: #b0d4f3;
 }
 
 .messages .message.right .timestamp {
@@ -155,14 +154,14 @@ body {
 	padding: 20px;
 	bottom: 0;
 	display: flex;
+	flex-direction: column;
 }
 
-.bottom_wrapper #msg_input {
+.bottom_wrapper #exampleFormControlTextarea2 #exampleFormControlTextarea1 {
 	flex-grow: 1;
 	outline-width: 0;
 	padding: 12px;
 	border: 1px solid #bcbdc0;
-	border-radius: 50px;
 	margin-right: 15px;
 }
 
@@ -172,6 +171,7 @@ body {
 	border-radius: 50px;
 	cursor: pointer;
 	padding: 12px;
+	margin-top: 12px;
 
 	color: #fff;
 	font-size: 18px;
