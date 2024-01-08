@@ -69,13 +69,9 @@ function showBotMessage(message, datetime) {
 $('#send_button').on('click', function (e) {
 	// get and show message and reset input
 	if($('#exampleFormControlTextarea1').val()!== '' && $('#exampleFormControlTextarea2').val()!== '' ){
-		showUserMessage($('#exampleFormControlTextarea1').val());
+		showUserMessage( "<h3> Your Problem: </h3> " + $('#exampleFormControlTextarea1').val() + "<h3> Your Solution: </h3> " + $('#exampleFormControlTextarea2').val());
 		$('#exampleFormControlTextarea1').val('');
 		$('#exampleFormControlTextarea2').val('');
-		// show bot message
-		// setTimeout(function () {
-		// 	showBotMessage(randomstring());
-		// }, 300);
 
 		// Make api call in order to handle the users input
 		makeApiCall()
@@ -85,24 +81,6 @@ $('#send_button').on('click', function (e) {
 });
 
 /**
- * Returns a random string. Just to specify bot message to the user.
- */
-function randomstring(length = 20) {
-	let output = '';
-
-	// magic function
-	var randomchar = function () {
-		var n = Math.floor(Math.random() * 62);
-		if (n < 10) return n;
-		if (n < 36) return String.fromCharCode(n + 55);
-		return String.fromCharCode(n + 61);
-	};
-
-	while (output.length < length) output += randomchar();
-	return output;
-}
-
-/**
  * Set initial bot message to the screen for the user.
  */
 $(window).on('load', function () {
@@ -110,7 +88,7 @@ $(window).on('load', function () {
 });
 
 /**
- *  Creates an alert to the screne for the user.
+ *  Creates an alert to the screen for the user.
  */
 
 function showAlert(message, alertType) {
@@ -123,7 +101,7 @@ function showAlert(message, alertType) {
 
 		// Append the alert to the document body
 		document.body.insertBefore(alertDiv, document.body.firstChild);
-
+		
 
 		// Auto-dismiss the alert after 3 seconds (adjust as needed)
 		setTimeout(function() {
