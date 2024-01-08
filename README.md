@@ -9,7 +9,7 @@ This project aims to validate or invalidate your proposed problem and solution i
 
 You are required to utilize Google Colab. Opening the notebook will show a table of contents where there is Mandatory, Pruning, Modeling, and the Web UI. Mandatory must be ran for anything else to work.
 
-Mandatory requires access to a specific folder. You may change the directory of said folder or use the one that is shared. The most important files are "GreenFilterModel.json" and "tokenizerGreenFilter.pickle".
+Mandatory requires access to a specific folder. You may change the directory of said folder or use the one that is shared. The most important files are "GreenFilterModel.json", "tokenizerGreenFilter.pickle", and "weights_GreenFilter.hdf5".
 
 If you are only interested in prompting, then going on the website will work. Otherwise, you may go straight to Web UI where all of the cell blocks must be ran (AFTER Mandatory), where it will load the aforementioned files.
 
