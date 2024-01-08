@@ -1,5 +1,7 @@
 # GreenFilter-AI
 
+[Colab Link](https://colab.research.google.com/drive/1E5pMBHdGAiegQE8tKSflfGxK4bkK2eCV?usp=sharing)
+
 This project aims to validate or invalidate your proposed problem and solution in regards to sustainability. This was done by initially using OpenAI to sift through the dataset and indicate on whether or not the proposed problem-solution pair was of any relevancy towards sustainability. Next, we pruned the data further by removing odd characters, different languages, and empty entries from the dataset. Finally, we train the model using a recurrent neural network, more specifically, using LSTM from tensorflow libraries. The end result is a Web Chat Bot where the user must provide a problem and solution, and gets validated if correct.
 
 
